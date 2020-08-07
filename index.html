@@ -1,0 +1,163 @@
+<html>
+<head>
+	<title>the game I guess</title>
+		<link rel="stylesheet" href="style.css"/>
+</head>
+	<body>
+		<div class="tab">
+			<h1 class="pagehead">Ghost<span class="p2"> Bounty</span></h1>
+			<p class="mid">---Hi there! welcome to my little game!---</p><br><br><br>
+			</div class="home "><br><br><br>
+			<!-- Party choser -->
+			<div class="home "id="home"><table>
+			<tr class="t1"><td><h2>Choose your party:</h2></td></tr>
+			<tr class="t1"><td>
+			<label>
+				<input type="radio" name="aMe" value="miku" checked>
+				<img src="img/miku.PNG" width="200">
+			</label>
+			</td>
+			<td>
+			<label>
+				<input type="radio" name="aMe" value="luka">
+				<img src="img/luka.PNG" width="200">
+			</label>
+			</td><td>
+			<label>
+				<input type="radio" name="aMe" value="rin">
+				<img src="img/rin.PNG" width="200">
+			</label>
+			</td></tr></table>
+			<!-- Home Menu -->
+			<div id="chooser" style="text-align:center" >
+			<button class="homeMenu active" onclick="chooseEnemy()">Bounty Board</button>
+			<button class="homeMenu" onclick="shop()">Shop</button>
+			<button class="homeMenu" onclick="inventory()">Inventory</button>
+			</div>
+			<!-- Enemy Choser -->
+			<div id="bounty" class="enemy"><table>
+			<tr class="t1"><td>
+			<label>
+				<input type="radio" name="aNotme" value="ghost" checked>
+				<img src="img/wg.PNG " width="150">
+			</label>
+			</td>
+			<td>
+			<label>
+				<input type="radio" name="aNotme" value="cuteG">
+				<img src="img/wcg.PNG" width="150">
+			</label>
+			</td><td>
+			<label>
+				<input type="radio" name="aNotme" value="coolG">
+				<img src="img/wcooG.PNG" width="150">
+			</label>
+			</td><td>
+			<label>
+				<input type="radio" name="aNotme" value="mimikyu">
+				<img src="img/wmi.PNG" width="150">
+			</label>
+			</td></tr>
+			</td></tr></table></div>
+			
+			<!-- Shop -->
+			<div class="shop" id="shop" style="display:none">
+			<table>
+			<tr class="t1"><td>
+			<label>
+				<input type="radio" name="aItem" value="sh" checked>
+				<img src="img/sh.png" width="100">
+			</label>
+			</td>
+			<td>
+			<label>
+				<input type="radio" name="aItem" value="mh">
+				<img src="img/mh.png" width="100">
+			</label>
+			</td><td>
+			<label>
+				<input type="radio" name="aItem" value="bh">
+				<img src="img/bh.png" width="100">
+			</label>
+			</td></tr>
+			<tr class="t1"><td colspan=3> 
+			<button onclick="buy()">Buy</button>
+			</td></tr></table></div>
+			
+			<!-- Inventory -->
+			<div class="inventory" id="inventory" style="display:none">
+				<p id="agold">Gold: 100</p>
+				<div id="itemList"></div>
+			</div>
+			</div>
+			
+			<table> <tr class="t1"><td>	<button class="homeMenu" id="start" onclick="startBattle()"> Start Battle!</button>	</td></tr> </table>
+			
+	<!-- Battle -->		
+	<div id="result"></div> 
+		<div id="stage" class="battle">
+		<br><br><br><br><br><br>
+		<div id="overlay" onclick="off()"></div>
+		<table>
+		<tr class="t1"><td>
+		<img id="playerSprite" onmouseover="onme()" onmouseout="off()" src="img/mi.jpg" alt="space" width="200"/>
+		<p id="mistat" >lv:  hp:  sp: </p>
+		<div class="base">
+		<div id="myhp" class="health" style="width:100%">100</div>
+		</div>
+		<div class="base">
+		<div id="mysp" class="special" style="width:100%">100</div>
+		</div>
+		<button onclick="attack()">Attack!</button>
+		<button  class="ma" onclick="magic()">Magic!</button>
+		<button onclick="guard()">Guard!</button>
+		<button onclick="goHome()">Flee!</button>
+		</td>
+		<td>
+		<img id="enemySprite" onmouseover="onNotme()" onmouseout="off()" src="img/ghost.jpg" alt="space" width="200"/>
+		<p id="gostat">lv:  hp:  </p>
+		<div class="base">
+		<div id="itshp" class="health" style="width:100%">100</div>
+		</div>
+		</td></tr>
+		</table>
+		<table class="t0">
+		<tr><td><p id="battleLog">Error</p> 
+		<button id="restart" style="visibility:hidden;" onclick="start()">Restart Battle</button>
+		<button id="stop" style="visibility:hidden;" onclick="goHome()" >Go home</button>
+		</td></tr>
+		</table>
+		</div><br><br><br>
+		
+		<script src="chara.js"></script>
+		<script src="gameScript.js"></script>
+		<script>
+		var me = miku;
+		var notme = ghost;
+		var money = document.getElementById("agold");
+		money.innerHTML ="Money: "+mygold;
+		
+		document.getElementById("playerSprite").src = me.img;
+		var myStat = document.getElementById("mistat");
+		myStat.innerHTML = player.getStat.call(me);
+		
+		var itsStat = document.getElementById("gostat");
+		itsStat.innerHTML = enemy.getStat.call(notme);
+		
+		var log = document.getElementById("battleLog");
+		log.innerHTML = "Battle Start!";
+		
+		var header = document.getElementById("chooser");
+		var btns = header.getElementsByClassName("homeMenu");
+		for (var i = 0; i < btns.length; i++) {
+			btns[i].addEventListener("click", function() {
+		var current = document.getElementsByClassName("active");
+			current[0].className = current[0].className.replace(" active", "");
+			this.className += " active";
+			});
+		}
+		</script>
+		
+
+	</body>
+</html>
